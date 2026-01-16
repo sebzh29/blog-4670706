@@ -25,3 +25,9 @@ a
     text-decoration: none;
     color: blue;
 }
+
+.footer-text
+{    
+    text-align: center;
+    margin-top: 20px;
+}
