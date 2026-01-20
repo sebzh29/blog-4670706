@@ -12,9 +12,7 @@ try {
 
                 post($identifier);
             } else {
-                echo 'Erreur : aucun identifiant de billet envoyé';
-
-                die;
+                throw new Exception('Erreur : aucun identifiant de billet envoyé');                
             }
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -22,19 +20,17 @@ try {
 
                 addComment($identifier, $_POST);
             } else {
-                echo 'Erreur : aucun identifiant de billet envoyé';
-
-                die;
+                throw new Exception('Erreur : aucun identifiant de billet envoyé');
             }
 
         } else {
-            echo "Erreur 404 : la page que vous recherchez n'existe pas.";
+            throw new Exception("Erreur 404 : la page que vous recherchez n'existe pas.");
         }
     } else {
         homepage();
     }
 } catch (Exception $e) {
-    $errorMessage =$e->getMessage();
+    $errorMessage = $e->getMessage();
 
     require('templates/error.php');
 }
