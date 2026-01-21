@@ -9,8 +9,8 @@ class Post
 }
 
 function getPosts(): array {
-    require_once 'utils/dbconnect.php';
-    $statement = $bdd->query(
+    $database = dbConnect();
+    $statement = $database->query(
         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
     );
     $posts = [];
@@ -28,8 +28,8 @@ function getPosts(): array {
 }
 
 function getPost(string $identifier): Post {
-    require_once 'utils/dbconnect.php';
-    $statement = $bdd->prepare(
+    $database = dbConnect();
+    $statement = $database->prepare(
         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
     );
     $statement->execute([$identifier]);
@@ -42,4 +42,11 @@ function getPost(string $identifier): Post {
     $post->identifier = $row['id'];
 
     return $post;
+}
+
+function dbConnect()
+{
+    $database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'password');
+
+    return $database;
 }

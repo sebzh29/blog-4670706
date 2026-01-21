@@ -1,7 +1,7 @@
 <?php
 
-require_once('src/controllers/homepage.php');
 require_once('src/controllers/add_comment.php');
+require_once('src/controllers/homepage.php');
 require_once('src/controllers/post.php');
 
 try {
@@ -12,7 +12,7 @@ try {
 
                 post($identifier);
             } else {
-                throw new Exception('Erreur : aucun identifiant de billet envoyé');                
+                throw new Exception('Aucun identifiant de billet envoyé');
             }
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -20,11 +20,10 @@ try {
 
                 addComment($identifier, $_POST);
             } else {
-                throw new Exception('Erreur : aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de billet envoyé');
             }
-
         } else {
-            throw new Exception("Erreur 404 : la page que vous recherchez n'existe pas.");
+            throw new Exception("La page que vous recherchez n'existe pas.");
         }
     } else {
         homepage();
