@@ -9,8 +9,8 @@ class Post
 }
 
 function getPosts(): array {
-    require 'utils/dbconnect.php';    
-    $statement = $$bdd->query(
+    require_once 'utils/dbconnect.php';
+    $statement = $bdd->query(
         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
     );
     $posts = [];
@@ -28,7 +28,7 @@ function getPosts(): array {
 }
 
 function getPost(string $identifier): Post {
-    require 'utils/dbconnect.php';
+    require_once 'utils/dbconnect.php';
     $statement = $bdd->prepare(
         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
     );
