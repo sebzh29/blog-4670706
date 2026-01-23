@@ -10,6 +10,15 @@ use Application\Model\Comment\CommentRepository;
 
 class AddComment
 {
+        
+    /**
+     * execute
+     *
+     * @param  mixed $post
+     * @param  mixed $input
+     * @return void
+     *  This method adds a comment to a post.
+     */
     public function execute(string $post, array $input)
     {
         $author = null;
